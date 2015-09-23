@@ -19,7 +19,7 @@ private enum ReorderDirection {
     optional var tableViewCanReorder: Bool { get set }
     optional var snapshotOpacity: Float { get set }
     
-    optional func transformForSnapshotOfReorderingCellAtIndexPath(indexPath: NSIndexPath) -> CGAffineTransform
+    optional func transformForSnapshotOfReorderingCellAtIndexPath(indexPath: NSIndexPath) -> CATransform3D
 }
 
 public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
@@ -27,11 +27,12 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
     public weak var reorderDelegate: BSTableViewReorderDelegate?
     
     private var longPressGestureRecognizer: UILongPressGestureRecognizer!
-    private var snapshotOfReorderingCell: UIImageView?
+    private var snapshotOfReorderingCell: UIView?
     
     private var scrollRate: CGFloat = 0
     private var scrollDisplayLink: CADisplayLink?
     private var currentIndexPath: NSIndexPath?
+    private var sourceIndexPath: NSIndexPath?
     private var previousRelativeLocation = CGPointZero
     
     private var numberOfRowsInTable: Int {
@@ -80,7 +81,10 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
     
     private var cellForCoveredIndexPath: UITableViewCell? {
         get {
-            return cellForRowAtIndexPath(coveredIndexPath!)
+            if let coveredIndexPath = coveredIndexPath {
+                return cellForRowAtIndexPath(coveredIndexPath)
+            }
+            return nil
         }
     }
     
@@ -113,12 +117,71 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
         }
     }
     
+    //MARK: - Class Methods
+    
+    //MARK: - Initialization
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: Selector("longPressed"))
         addGestureRecognizer(longPressGestureRecognizer)
     }
+    
+    //MARK: - Deinitialization
+    
+    //MARK: - Actions
+    
+    //MARK: - Public
+    
+    public func adaptedNumberOfRowsInSection(section: Int, var withNumberOfRows numberOfRows: Int) -> Int {
+        
+        if let currentIndexPath = currentIndexPath where currentIndexPath.section != sourceIndexPath?.section {
+            
+            if section == currentIndexPath.section {
+                numberOfRows++
+            } else if section == sourceIndexPath!.section {
+                numberOfRows--
+            }
+        }
+        
+        return numberOfRows
+    }
+    
+    public func adaptedIndexPathForRowAtIndexPath(var indexPath: NSIndexPath) -> NSIndexPath {
+        
+        if let currentIndexPath = currentIndexPath, let sourceIndexPath = sourceIndexPath {
+            
+            var adaptedIndexPathRow: Int? = nil
+            
+            if indexPath == currentIndexPath {
+                indexPath = sourceIndexPath
+            } else if currentIndexPath.section == sourceIndexPath.section {
+                
+                if indexPath.row >= sourceIndexPath.row && indexPath.row < currentIndexPath.row {
+                    adaptedIndexPathRow = indexPath.row + 1
+                } else if indexPath.row <= sourceIndexPath.row && indexPath.row > currentIndexPath.row {
+                    adaptedIndexPathRow = indexPath.row - 1
+                }
+                
+            } else {
+                
+                if indexPath.section == sourceIndexPath.section && indexPath.row >= sourceIndexPath.row {
+                    adaptedIndexPathRow = indexPath.row + 1
+                } else if indexPath.section == currentIndexPath.section && indexPath.row > currentIndexPath.row {
+                    adaptedIndexPathRow = indexPath.row - 1
+                }
+            }
+            
+            if let adaptedIndexPathRow = adaptedIndexPathRow {
+                indexPath = NSIndexPath(forRow: adaptedIndexPathRow, inSection: indexPath.section)
+            }
+        }
+        
+        return indexPath
+    }
+    
+    //MARK: - Internal
     
     func longPressed() {
         
@@ -127,9 +190,8 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
         }
         
         guard numberOfRowsInTable > 0  else {
-
-            longPressGestureRecognizer.enabled = false
-            longPressGestureRecognizer.enabled = true
+            
+            cancelGestureRecognizer()
             return
         }
         
@@ -137,20 +199,32 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
         case .Began:
             
             if let cell = cellForCoveredIndexPath {
-
+                
                 cell.setSelected(false, animated: false)
                 cell.setHighlighted(false, animated: false)
                 
                 currentIndexPath = coveredIndexPath
+                sourceIndexPath = coveredIndexPath
+                
+                if let sourceIndexPath = sourceIndexPath {
+                    if let canMoveSourceRow = dataSource?.tableView?(self, canMoveRowAtIndexPath: sourceIndexPath) where !canMoveSourceRow {
+                        print("cannot")
+                        
+                        cancelGestureRecognizer()
+                        
+                        return
+                    }
+                }
+                
                 setupSnapshot()
-   
+                
                 scrollDisplayLink = CADisplayLink(target: self, selector: Selector("scrollTable"))
                 scrollDisplayLink?.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
                 cellForCurrentIndexPath?.hidden = true
             }
             
         case .Changed:
-        
+            
             let scrollZoneHeight = bounds.size.height / 6
             let bottomScrollBeginning = contentOffset.y + frame.size.height - scrollZoneHeight
             let topScrollBeginning = contentOffset.y + scrollZoneHeight
@@ -164,15 +238,20 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
             }
             
         case .Ended, .Cancelled:
-
+            
             scrollDisplayLink?.invalidate()
             scrollDisplayLink = nil
             scrollRate = 0
             
             UIView.animateWithDuration(0.25, animations: { [unowned self] in
                 
-                self.snapshotOfReorderingCell?.transform = CGAffineTransformIdentity
+                self.snapshotOfReorderingCell?.layer.transform = CATransform3DIdentity
                 self.snapshotOfReorderingCell?.frame = self.rectForRowAtIndexPath(self.currentIndexPath!)
+                
+                if self.sourceIndexPath != self.currentIndexPath {
+                    
+                    self.dataSource?.tableView?(self, moveRowAtIndexPath: self.sourceIndexPath!, toIndexPath: self.currentIndexPath!)
+                }
                 
                 }, completion: { finished in
                     
@@ -180,6 +259,7 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
                     self.snapshotOfReorderingCell?.removeFromSuperview()
                     self.snapshotOfReorderingCell = nil
                     self.currentIndexPath = nil
+                    self.sourceIndexPath = nil
             })
             
         default:
@@ -190,9 +270,6 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
     func scrollTable() {
         
         guard relativeLocation.y > 0 && relativeLocation.y <= contentSize.height + 50 else {
-
-            longPressGestureRecognizer.enabled = false
-            longPressGestureRecognizer.enabled = true
             return
         }
         
@@ -214,27 +291,34 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
         previousRelativeLocation = relativeLocation
     }
     
+    //MARK: - Private
+    
+    private func cancelGestureRecognizer() {
+        
+        longPressGestureRecognizer.enabled = false
+        longPressGestureRecognizer.enabled = true
+    }
+    
     private func updateTable() {
         
-        if coveredIndexPath != nil && coveredIndexPath! != currentIndexPath! {
+        if let coveredIndexPath = coveredIndexPath, let currentIndexPath = currentIndexPath where coveredIndexPath != currentIndexPath {
             
-            let verticalPositionInCoveredCell = longPressGestureRecognizer.locationInView(cellForRowAtIndexPath(coveredIndexPath!)).y
+            let verticalPositionInCoveredCell = longPressGestureRecognizer.locationInView(cellForRowAtIndexPath(coveredIndexPath)).y
             
             if direction == .Down && heightForCoveredCell - verticalPositionInCoveredCell <= heightForCurrentCell / 2 || direction == .Up && verticalPositionInCoveredCell <= heightForCurrentCell / 2 {
                 
                 beginUpdates()
-                moveRowAtIndexPath(currentIndexPath!, toIndexPath: coveredIndexPath!)
-                dataSource?.tableView?(self, moveRowAtIndexPath: self.currentIndexPath!, toIndexPath: self.coveredIndexPath!)
-                currentIndexPath = coveredIndexPath
+                moveRowAtIndexPath(currentIndexPath, toIndexPath: coveredIndexPath)
+                self.currentIndexPath = self.coveredIndexPath
                 endUpdates()
             }
+            
         } else if let coveredSection = coveredSection where numberOfRowsInSection(coveredSection) == 0 {
             
             let newIndexPath = NSIndexPath(forRow: 0, inSection: coveredSection)
             
             beginUpdates()
             moveRowAtIndexPath(currentIndexPath!, toIndexPath: newIndexPath)
-            dataSource?.tableView?(self, moveRowAtIndexPath: self.currentIndexPath!, toIndexPath: newIndexPath)
             currentIndexPath = newIndexPath
             endUpdates()
         }
@@ -251,12 +335,12 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
         
         UIGraphicsBeginImageContextWithOptions(cellForCoveredIndexPath!.bounds.size, false, 0)
         cellForCoveredIndexPath!.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-    
+        
         snapshotOfReorderingCell = UIImageView(image: UIGraphicsGetImageFromCurrentImageContext())
         addSubview(snapshotOfReorderingCell!)
         
-        let rect = rectForRowAtIndexPath(coveredIndexPath!)
-        snapshotOfReorderingCell?.frame = CGRectOffset(snapshotOfReorderingCell!.bounds, rect.origin.x, rect.origin.y)
+        let frameForCoveredIndexPath = rectForRowAtIndexPath(coveredIndexPath!)
+        snapshotOfReorderingCell?.frame = CGRectOffset(snapshotOfReorderingCell!.bounds, frameForCoveredIndexPath.origin.x, frameForCoveredIndexPath.origin.y)
         
         snapshotOfReorderingCell?.layer.masksToBounds = false
         snapshotOfReorderingCell?.layer.shadowColor = UIColor.blackColor().CGColor
@@ -267,10 +351,13 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
         
         UIView.animateWithDuration(0.25, animations: {
             
-            self.snapshotOfReorderingCell?.transform = self.reorderDelegate?.transformForSnapshotOfReorderingCellAtIndexPath?(self.currentIndexPath!) ?? CGAffineTransformMakeScale(1.1, 1.1)
+            self.snapshotOfReorderingCell?.layer.transform = self.reorderDelegate?.transformForSnapshotOfReorderingCellAtIndexPath?(self.currentIndexPath!) ?? CATransform3DMakeScale(1.1, 1.1, 1)
             self.snapshotOfReorderingCell?.center = CGPointMake(self.center.x, self.relativeLocation.y)
         })
         
+        
         UIGraphicsEndImageContext()
     }
+    
+    //MARK: - Overridden
 }
