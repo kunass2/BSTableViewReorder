@@ -22,7 +22,7 @@ pod "BSTableViewReorder"
 
 ## Author
 
-Bartłomiej Semańczyk, bartlomiej.semanczyk@railwaymen.org
+Bartłomiej Semańczyk, bartekss2@icloud.com
 
 ## License
 

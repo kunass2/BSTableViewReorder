@@ -8,22 +8,21 @@
 
 Pod::Spec.new do |s|
   s.name             = "BSTableViewReorder"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of BSTableViewReorder."
+  s.version          = "1.0"
+  s.summary          = "hello, this is simple extension for UITableView."
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
 #   * Try to keep it short, snappy and to the point.
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
-  s.description      = <<-DESC
-                       DESC
+  s.description      = "Use BSTableViewReorderEverywhere you need drag and drop your cell at any touch point. It works with multiply sections. Customize your snapshot"
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/BSTableViewReorder"
+  s.homepage         = "https://github.com/kunass2/BSTableViewReorder"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
-  s.author           = { "Bartłomiej Semańczyk" => "bartlomiej.semanczyk@railwaymen.org" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/BSTableViewReorder.git", :tag => s.version.to_s }
+  s.author           = { "Bartłomiej Semańczyk" => "bartekss2@icloud.com" }
+  s.source           = { :git => "https://github.com/kunass2/BSTableViewReorder.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '8.0'
