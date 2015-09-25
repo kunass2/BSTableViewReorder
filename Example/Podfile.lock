@@ -1,5 +1,5 @@
 PODS:
-  - BSTableViewReorder (1.0.5)
+  - BSTableViewReorder (1.0.6)
 
 DEPENDENCIES:
   - BSTableViewReorder (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  BSTableViewReorder: 79ed7b9764d2490701d6e38ce2877a0e50022b18
+  BSTableViewReorder: 016a131f4de84e8a4d910bb9ac484ff08d98096d
 
 COCOAPODS: 0.38.2

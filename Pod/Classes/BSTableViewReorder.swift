@@ -309,6 +309,7 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
                 
                 beginUpdates()
                 moveRowAtIndexPath(currentIndexPath, toIndexPath: coveredIndexPath)
+                cellForCurrentIndexPath?.hidden = true
                 self.currentIndexPath = self.coveredIndexPath
                 endUpdates()
             }
@@ -319,6 +320,7 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
             
             beginUpdates()
             moveRowAtIndexPath(currentIndexPath!, toIndexPath: newIndexPath)
+            cellForCurrentIndexPath?.hidden = true
             currentIndexPath = newIndexPath
             endUpdates()
         }
