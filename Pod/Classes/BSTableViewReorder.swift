@@ -243,7 +243,7 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
             scrollDisplayLink = nil
             scrollRate = 0
             
-            UIView.animateWithDuration(0.25, animations: { [unowned self] in
+            UIView.animateWithDuration(0.25, animations: {
                 
                 self.snapshotOfReorderingCell?.layer.transform = CATransform3DIdentity
                 self.snapshotOfReorderingCell?.frame = self.rectForRowAtIndexPath(self.currentIndexPath!)

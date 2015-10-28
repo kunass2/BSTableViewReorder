@@ -1,9 +1,6 @@
-# BSTableViewReorder
+<img src="Assets/icon.png" width="200"><br />
 
-[![CI Status](http://img.shields.io/travis/Bartłomiej Semańczyk/BSTableViewReorder.svg?style=flat)](https://travis-ci.org/Bartłomiej Semańczyk/BSTableViewReorder)
-[![Version](https://img.shields.io/cocoapods/v/BSTableViewReorder.svg?style=flat)](http://cocoapods.org/pods/BSTableViewReorder)
-[![License](https://img.shields.io/cocoapods/l/BSTableViewReorder.svg?style=flat)](http://cocoapods.org/pods/BSTableViewReorder)
-[![Platform](https://img.shields.io/cocoapods/p/BSTableViewReorder.svg?style=flat)](http://cocoapods.org/pods/BSTableViewReorder)
+# BSTableViewReorder
 
 ![Reordering animation](Assets/example.gif)
 
