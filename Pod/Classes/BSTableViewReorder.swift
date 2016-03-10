@@ -90,7 +90,11 @@ public class BSTableViewReorder: UITableView, UIScrollViewDelegate {
     
     private var cellForCurrentIndexPath: UITableViewCell? {
         get {
-            return cellForRowAtIndexPath(currentIndexPath!)
+            if let currentIndexPath = currentIndexPath {
+                return cellForRowAtIndexPath(currentIndexPath)
+            } else {
+                return nil
+            }
         }
     }
     

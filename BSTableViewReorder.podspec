@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "BSTableViewReorder"
-  s.version          = "1.0.8"
+  s.version          = "1.0.9"
   s.summary          = "hello, this is simple extension for UITableView."
 
 # This description is used to generate tags and improve search results.
