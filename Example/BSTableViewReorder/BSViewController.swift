@@ -22,11 +22,29 @@ class BSViewController: UIViewController, UITableViewDataSource, UITableViewDele
         ["twelf", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"]
     ]
     
+    //MARK: - Class Methods
+    
+    //MARK: - Initialization
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.reorderDelegate = self
     }
+    
+    //MARK: - Deinitialization
+    
+    //MARK: - Actions
+    
+    //MARK: - Public
+    
+    //MARK: - Internal
+    
+    //MARK: - Private
+    
+    //MARK: - Overridden
+    
+    //MARK: - UITableViewDataSource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return data.count
@@ -43,7 +61,6 @@ class BSViewController: UIViewController, UITableViewDataSource, UITableViewDele
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier, forIndexPath: indexPath) as! BSTableViewCell
-        
         let adaptedIndexPath = self.tableView.adaptedIndexPathForRowAtIndexPath(indexPath)
         
         cell.label?.text = data[adaptedIndexPath.section][adaptedIndexPath.row]
@@ -51,22 +68,28 @@ class BSViewController: UIViewController, UITableViewDataSource, UITableViewDele
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 40
-    }
-    
     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return indexPath.section != 1
     }
     
     func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-
+        
         let obj = data[sourceIndexPath.section][sourceIndexPath.row]
+        
         data[sourceIndexPath.section].removeAtIndex(sourceIndexPath.row)
         data[destinationIndexPath.section].insert(obj, atIndex: destinationIndexPath.row)
     }
     
+    //MARK: - UITableViewDelegate
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 40
+    }
+    
+    //MARK: - BSTableViewReorderDelegate
+    
     func transformForSnapshotOfReorderingCellAtIndexPath(indexPath: NSIndexPath) -> CATransform3D {
+        
         var transform = CATransform3DIdentity
         transform.m34 = CGFloat(1.0 / -1000)
         
@@ -76,8 +99,4 @@ class BSViewController: UIViewController, UITableViewDataSource, UITableViewDele
         
         return transform
     }
-}
-
-class BSTableViewCell: UITableViewCell {
-    @IBOutlet var label: UILabel!
 }

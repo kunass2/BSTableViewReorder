@@ -1,0 +1,14 @@
+PODS:
+  - BSTableViewReorder (1.0.6)
+
+DEPENDENCIES:
+  - BSTableViewReorder (from `../`)
+
+EXTERNAL SOURCES:
+  BSTableViewReorder:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  BSTableViewReorder: 016a131f4de84e8a4d910bb9ac484ff08d98096d
+
+COCOAPODS: 0.38.2

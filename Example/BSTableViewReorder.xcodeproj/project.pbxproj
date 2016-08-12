@@ -9,10 +9,12 @@
 /* Begin PBXBuildFile section */
 		13C0A079662A119C33DE56A4 /* Pods_BSTableViewReorder_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FCC554A3D71CC64DD6EE747 /* Pods_BSTableViewReorder_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
-		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		BC152A6B1BB2BF3B0088862F /* BSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC152A6A1BB2BF3B0088862F /* BSViewController.swift */; };
+		BC54BF581D5DAD0200670C9F /* BSTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54BF571D5DAD0200670C9F /* BSTableViewCell.swift */; };
+		BC54BF5A1D5DAE0000670C9F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BC54BF591D5DAE0000670C9F /* icon.png */; };
+		BC54BF5D1D5DAE4700670C9F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC54BF5B1D5DAE4700670C9F /* LaunchScreen.xib */; };
+		BC54BF5E1D5DAE4700670C9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC54BF5C1D5DAE4700670C9F /* Main.storyboard */; };
 		FCDAD0D5EE7D0AD52E02BA4F /* Pods_BSTableViewReorder_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF24FD2203C759AEB0FBB69 /* Pods_BSTableViewReorder_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -33,14 +35,16 @@
 		607FACD01AFB9204008FA782 /* BSTableViewReorder_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BSTableViewReorder_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* BSTableViewReorder_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BSTableViewReorder_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7B282EFE9848EAE94D97C683 /* Pods-BSTableViewReorder_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSTableViewReorder_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BSTableViewReorder_Tests/Pods-BSTableViewReorder_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8CE6C2E8672153AA83237C31 /* Pods-BSTableViewReorder_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSTableViewReorder_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BSTableViewReorder_Tests/Pods-BSTableViewReorder_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		BC152A6A1BB2BF3B0088862F /* BSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSViewController.swift; sourceTree = "<group>"; };
+		BC54BF571D5DAD0200670C9F /* BSTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSTableViewCell.swift; sourceTree = "<group>"; };
+		BC54BF591D5DAE0000670C9F /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		BC54BF5B1D5DAE4700670C9F /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		BC54BF5C1D5DAE4700670C9F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D68230DFB9DEE06BCEA67926 /* Pods-BSTableViewReorder_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSTableViewReorder_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-BSTableViewReorder_Example/Pods-BSTableViewReorder_Example.release.xcconfig"; sourceTree = "<group>"; };
 		DED3BE05BD9C2822928B43FE /* Pods-BSTableViewReorder_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSTableViewReorder_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BSTableViewReorder_Example/Pods-BSTableViewReorder_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F3A601513747ECD49FB52F07 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -112,9 +116,11 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				BC54BF591D5DAE0000670C9F /* icon.png */,
+				BC54BF5B1D5DAE4700670C9F /* LaunchScreen.xib */,
+				BC54BF5C1D5DAE4700670C9F /* Main.storyboard */,
 				BC152A6A1BB2BF3B0088862F /* BSViewController.swift */,
-				607FACD91AFB9204008FA782 /* Main.storyboard */,
-				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
+				BC54BF571D5DAD0200670C9F /* BSTableViewCell.swift */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
 			name = "Example for BSTableViewReorder";
@@ -207,7 +213,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
@@ -244,8 +250,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
-				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				BC54BF5E1D5DAE4700670C9F /* Main.storyboard in Resources */,
+				BC54BF5D1D5DAE4700670C9F /* LaunchScreen.xib in Resources */,
+				BC54BF5A1D5DAE0000670C9F /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				BC54BF581D5DAD0200670C9F /* BSTableViewCell.swift in Sources */,
 				BC152A6B1BB2BF3B0088862F /* BSViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,25 +386,6 @@
 			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				607FACDA1AFB9204008FA782 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		607FACDE1AFB9204008FA782 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				607FACDF1AFB9204008FA782 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		607FACED1AFB9204008FA782 /* Debug */ = {
@@ -421,6 +410,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -495,6 +485,7 @@
 				INFOPLIST_FILE = BSTableViewReorder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "81d2573c-98f3-4dea-af88-4bbb84bbd12d";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -513,6 +504,7 @@
 				INFOPLIST_FILE = BSTableViewReorder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "81d2573c-98f3-4dea-af88-4bbb84bbd12d";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -524,16 +516,14 @@
 			baseConfigurationReference = 8CE6C2E8672153AA83237C31 /* Pods-BSTableViewReorder_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BSTableViewReorder_Example.app/BSTableViewReorder_Example";
 			};
@@ -544,12 +534,10 @@
 			baseConfigurationReference = 7B282EFE9848EAE94D97C683 /* Pods-BSTableViewReorder_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BSTableViewReorder_Example.app/BSTableViewReorder_Example";
 			};

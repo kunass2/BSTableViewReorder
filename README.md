@@ -83,11 +83,13 @@ func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexP
 
 ```Swift
 @objc public protocol BSTableViewReorderDelegate: class, UITableViewDelegate {
-
-    optional var tableViewCanReorder: Bool { get set } //table can be reordered or not
-    optional var snapshotOpacity: Float { get set } //alpha channel for snapshot view
-
-    optional func transformForSnapshotOfReorderingCellAtIndexPath(indexPath: NSIndexPath) -> CATransform3D //transform for snapshot while it is reordered
+    
+    optional var tableViewCanReorder: Bool { get set }
+    optional var snapshotOpacity: Float { get set }
+    
+    optional func tableViewDidStartLongPress(gestureRecognizer: UILongPressGestureRecognizer)
+    optional func tableViewDidEndLongPress(gestureRecognizer: UILongPressGestureRecognizer)
+    optional func transformForSnapshotOfReorderingCellAtIndexPath(indexPath: NSIndexPath) -> CATransform3D
 }
 ```
 
