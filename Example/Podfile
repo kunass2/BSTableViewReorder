@@ -7,6 +7,4 @@ end
 
 target 'BSTableViewReorder_Tests', :exclusive => true do
   pod "BSTableViewReorder", :path => "../"
-
-  
 end

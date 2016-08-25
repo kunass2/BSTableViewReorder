@@ -4,7 +4,7 @@
 //
 //  Created by Bartłomiej Semańczyk on 23/09/15.
 //  Copyright © 2015 Bartłomiej Semańczyk. All rights reserved.
-//
+//cd
 
 import UIKit
 import BSTableViewReorder
@@ -46,21 +46,21 @@ class BSViewController: UIViewController, UITableViewDataSource, UITableViewDele
     
     //MARK: - UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return data.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tableView.adaptedNumberOfRowsInSection(section, withNumberOfRows: data[section].count)
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "section: \(section)"
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier, forIndexPath: indexPath) as! BSTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath) as! BSTableViewCell
         let adaptedIndexPath = self.tableView.adaptedIndexPathForRowAtIndexPath(indexPath)
         
         cell.label?.text = data[adaptedIndexPath.section][adaptedIndexPath.row]
@@ -68,27 +68,27 @@ class BSViewController: UIViewController, UITableViewDataSource, UITableViewDele
         return cell
     }
     
-    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return indexPath.section != 1
     }
     
-    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
         let obj = data[sourceIndexPath.section][sourceIndexPath.row]
         
-        data[sourceIndexPath.section].removeAtIndex(sourceIndexPath.row)
-        data[destinationIndexPath.section].insert(obj, atIndex: destinationIndexPath.row)
+        data[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+        data[destinationIndexPath.section].insert(obj, at: destinationIndexPath.row)
     }
     
     //MARK: - UITableViewDelegate
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
     }
     
     //MARK: - BSTableViewReorderDelegate
     
-    func transformForSnapshotOfReorderingCellAtIndexPath(indexPath: NSIndexPath) -> CATransform3D {
+    private func transformForSnapshotOfReorderingCell(atIndexPath indexPath: IndexPath) -> CATransform3D {
         
         var transform = CATransform3DIdentity
         transform.m34 = CGFloat(1.0 / -1000)
