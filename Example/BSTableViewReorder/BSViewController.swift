@@ -88,7 +88,7 @@ class BSViewController: UIViewController, UITableViewDataSource, UITableViewDele
     
     //MARK: - BSTableViewReorderDelegate
     
-    private func transformForSnapshotOfReorderingCell(atIndexPath indexPath: IndexPath) -> CATransform3D {
+    func transformForSnapshotOfReorderingCell(atIndexPath indexPath: IndexPath) -> CATransform3D {
         
         var transform = CATransform3DIdentity
         transform.m34 = CGFloat(1.0 / -1000)

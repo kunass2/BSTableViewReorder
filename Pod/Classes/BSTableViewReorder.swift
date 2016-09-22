@@ -13,9 +13,9 @@ import UIKit
     @objc optional var tableViewCanReorder: Bool { get set }
     @objc optional var snapshotOpacity: Float { get set }
     
-    @objc optional func tableViewDidStartLongPress(_ gestureRecognizer: UILongPressGestureRecognizer)
-    @objc optional func tableViewDidEndLongPress(_ gestureRecognizer: UILongPressGestureRecognizer)
-    @objc optional func transformForSnapshotOfReorderingCellAtIndexPath(_ indexPath: IndexPath) -> CATransform3D
+    @objc optional func tableViewDidStartLongPress(gestureRecognizer: UILongPressGestureRecognizer)
+    @objc optional func tableViewDidEndLongPress(gestureRecognizer: UILongPressGestureRecognizer)
+    @objc optional func transformForSnapshotOfReorderingCell(atIndexPath indexPath: IndexPath) -> CATransform3D
 }
 
 open class BSTableViewReorder: UITableView, UIScrollViewDelegate {
@@ -253,7 +253,7 @@ open class BSTableViewReorder: UITableView, UIScrollViewDelegate {
                 
                 setupSnapshot()
                 
-                reorderDelegate?.tableViewDidStartLongPress?(longPressGestureRecognizer)
+                reorderDelegate?.tableViewDidStartLongPress?(gestureRecognizer: longPressGestureRecognizer)
                 
                 scrollDisplayLink = CADisplayLink(target: self, selector: #selector(scrollTable))
                 scrollDisplayLink?.add(to: RunLoop.main, forMode: RunLoopMode.commonModes)
@@ -295,7 +295,7 @@ open class BSTableViewReorder: UITableView, UIScrollViewDelegate {
                 
                 }, completion: { finished in
                     
-                    self.reorderDelegate?.tableViewDidEndLongPress?(self.longPressGestureRecognizer)
+                    self.reorderDelegate?.tableViewDidEndLongPress?(gestureRecognizer: self.longPressGestureRecognizer)
                     self.cellForCurrentIndexPath?.isHidden = false
                     self.snapshotOfReorderingCell?.removeFromSuperview()
                     self.snapshotOfReorderingCell = nil
@@ -403,7 +403,7 @@ open class BSTableViewReorder: UITableView, UIScrollViewDelegate {
         
         UIView.animate(withDuration: 0.25) {
             
-            self.snapshotOfReorderingCell?.layer.transform = self.reorderDelegate?.transformForSnapshotOfReorderingCellAtIndexPath?(self.currentIndexPath!) ?? CATransform3DMakeScale(1.1, 1.1, 1)
+            self.snapshotOfReorderingCell?.layer.transform = self.reorderDelegate?.transformForSnapshotOfReorderingCell?(atIndexPath: self.currentIndexPath!) ?? CATransform3DMakeScale(1.1, 1.1, 1)
             self.snapshotOfReorderingCell?.center = CGPoint(x: self.center.x, y: self.relativeLocation.y)
         }
         

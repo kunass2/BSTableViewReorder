@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "BSTableViewReorder"
-  s.version          = "1.5"
+  s.version          = "1.6"
   s.summary          = "hello, this is simple extension for UITableView."
 
   s.description      = "Use BSTableViewReorder everywhere you need drag and drop your cell at any touch point. It works with multiply sections. Customize your snapshot"
